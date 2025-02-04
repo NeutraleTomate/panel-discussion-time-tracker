@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@1/css/pico.min.css">
+
+    <script src="/static/js/socket.io.js"></script>
+    <script src=" https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.min.js "></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.0.0"></script>
+
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Sora:wght@100..800&display=swap" rel="stylesheet">
+
+
+    <style>
+        :root {
+            --primary: #4ED440 !important;
+            --background: #f1f2e5 !important;
+        }
+
+        html, body {
+            background: var(--background);
+            max-height: 100%;
+        }
+
+        .logo {
+            position: fixed;
+            right: 0;
+            top: 0;
+            margin: 2em;
+        }
+
+        .foot-right {
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            padding: 5px;
+        }
+
+        .foot-left {
+            position: absolute;
+            bottom: 0;
+            padding: 5px;
+        }
+
+
+
+    </style>
+
+    {% block head %} {% endblock %}
+</head>
+<body>
+
+<div class="logo">
+    <svg class="b-header__logo" viewBox="0 0 120 102" width="120" height="102"
+         xmlns="http://www.w3.org/2000/svg">
+        <path d="M42.597 101.839c-5.248 0-9.157-1.777-11.302-5.136-1.274-1.993-1.84-4.43-1.84-7.897V72.518h7.64v16.515c0 1.344.286 2.721.728 3.508.895 1.596 2.546 2.439 4.774 2.439 2.229 0 3.88-.843 4.775-2.439.442-.787.728-2.164.728-3.508V72.518h7.64v16.286c0 3.343-.588 5.906-1.8 7.833-2.136 3.404-6.058 5.202-11.343 5.202zm50.137-.459V72.518h10.838c3.181 0 6.562.276 9.75 2.275 3.96 2.486 6.141 6.802 6.141 12.156 0 5.367-2.19 9.69-6.165 12.171-3.18 1.987-6.553 2.26-9.726 2.26zm7.19-6.557h4.37c4.783 0 7.638-2.944 7.638-7.874s-2.857-7.873-7.638-7.873h-4.37zm-20.243 6.557L68.155 83.516v17.864h-7.322V72.518h7.64l11.522 17.86v-17.86h7.321v28.862zm-79.372 0V72.518h12.59c4.168 0 6.985.306 9.052 1.862 1.81 1.362 2.935 3.599 2.935 5.84 0 2.11-.57 3.601-1.904 4.991-.444.463-1.025.887-1.725 1.265l-.781.42.817.344c.936.395 1.748.934 2.349 1.554 1.333 1.377 1.904 2.856 1.904 4.949 0 2.22-1.125 4.437-2.933 5.789-2.07 1.545-4.886 1.848-9.054 1.848zm7.385-5.73h6.358c2.34 0 3.682-1.114 3.682-3.056 0-1.133-.478-3.034-3.682-3.034H7.694zm0-11.555h5.84c2.245 0 3.533-1.1 3.533-3.013 0-1.902-1.28-2.993-3.512-2.993H7.694zm53.14-16.67V51.148a21.593 21.593 0 0013.46-6.927 21.593 21.593 0 005.64-14.57c0-5.406-2.004-10.58-5.64-14.572a21.593 21.593 0 00-13.46-6.927V.684a29.54 29.54 0 0118.993 9.102c5.132 5.404 7.958 12.458 7.958 19.862a28.6 28.6 0 01-5.343 16.691 29.372 29.372 0 01-13.693 10.496l-.276.104v10.486zm-12.734 0V56.942l-.276-.104A29.386 29.386 0 0134.132 46.34a28.6 28.6 0 01-5.344-16.69c0-7.405 2.827-14.46 7.959-19.862A29.545 29.545 0 0155.74.687v7.468a21.593 21.593 0 00-13.46 6.926 21.584 21.584 0 00-5.64 14.57c0 5.404 2.004 10.578 5.64 14.57a21.593 21.593 0 0013.46 6.927v16.277z"
+              fill="#004535"></path>
+        <circle cx="58.287" cy="29.65" r="16.553" fill="#4ed440"></circle>
+    </svg>
+</div>
+
+<main class="container">
+
+
+    {% block main %} {% endblock %}
+</main>
+
+<footer>
+
+    <small class="foot-left">
+        Entwickelt im Auftrag von BUND Landesverband Sachsen e. V.
+    </small>
+    <small class="foot-right">
+        &#169;Robin Bechstein
+    </small>
+
+</footer>
+</body>
+</html>

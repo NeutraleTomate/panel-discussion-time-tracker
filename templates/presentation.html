@@ -1,0 +1,83 @@
+{% extends "default.html" %}
+{% block head %}
+    <title>BUND Sachsen</title>
+    <script src="/static/js/presentation.js"></script>
+{% endblock %}
+{% block main %}
+    <div>
+        <canvas id="myChart"></canvas>
+    </div>
+
+    <script>
+        const ctx = document.getElementById('myChart');
+        Chart.register(ChartDataLabels);
+
+        const chart = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: [],
+                    datasets: [{
+                        label: 'Seconds',
+                        data: [],
+                        borderWidth: 0
+                    }]
+                },
+                options: {
+                    scales: {
+                        x: {
+                            ticks: {
+                                font: {
+                                    size: 18,
+                                    family: "sora",
+                                }
+                            }
+                        },
+                        y: {
+                            suggestedMax: 300,
+                            beginAtZero: true,
+                            ticks: {
+                                font: {
+                                    size: 16,
+                                    family: "sora",
+                                },
+                                callback: function (value, index, ticks) {
+                                    return "   "+Math.floor(value / 3600).toString().padStart(2, "0") + ':' + Math.floor((value % 3600) / 60).toString().padStart(2, "0")
+                                }
+                            },
+
+
+                        }
+                    },
+                    plugins: {
+                        legend: {
+                            display: false,
+                        },
+                        datalabels: {
+                            font: {
+                                size: "18",
+                                family: "sora",
+                                weight: "bold",
+                            },
+                            formatter: function (value, context) {
+                                return Math.floor(value / 3600).toString().padStart(2, "0") + ':' + Math.floor((value % 3600) / 60).toString().padStart(2, "0") + ':' + Math.floor((value % 60)).toString().padStart(2, "0");
+
+                            },
+                            backgroundColor: "#4ed440",
+                            color: '#004535',
+
+                            borderRadius:10,
+
+                        }
+
+
+                    },
+
+                }
+            })
+        ;
+    </script>
+
+
+
+
+{% endblock %}

@@ -1,0 +1,42 @@
+{% extends "default.html" %}
+{% block head %}
+    <title>Controls</title>
+    <script src="/static/js/socket.io.js"></script>
+    <script src="/static/js/controls.js"></script>
+    <style>
+        .grid{
+        max-width: 40em;
+        margin-bottom: 2em
+    }
+    </style>
+{% endblock %}
+{% block main %}
+    <div id="buttons">
+        {% for speaker in speakers %}
+            <div class="grid">
+                <button
+                        {% if speaker[disabled] %} disabled="disabled" {% endif %}
+
+                                                   onclick="socket.emit('start', {name: '{{ speaker[0] }}' })">
+                    start
+                </button>
+                <button
+                        onclick="socket.emit('stop', {name: '{{ speaker[0] }}' })">
+                    stop
+                </button>
+                <text>{{ speaker }}</text>
+            </div>
+        {% endfor %}
+    </div>
+    <table>
+        <thead>
+        <tr>
+            <th scope="col">Name</th>
+            <th scope="col">Start</th>
+            <th scope="col">End</th>
+            <th scope="col">Duration</th>
+        </tr>
+        </thead>
+        <tbody id="tablebody"></tbody>
+    </table>
+{% endblock %}
