@@ -37,6 +37,7 @@ timetracker = timetracker.TimeTracker(speakers)
 def index():
     return render_template("index.html")
 
+
 @app.route('/presentation')
 def presentation():
     return render_template("presentation.html")
@@ -56,10 +57,11 @@ def start(data):
 def stop(data):
     timetracker.stop(data["name"])
 
+
 @socketio.on('update')
 def send_update(d):
-    to=d["sid"]
-    
+    to = d["sid"]
+
     names = timetracker.names()
     times = timetracker.times()
     times_total = timetracker.times_total()
@@ -71,20 +73,19 @@ def send_update(d):
         "colors": colors,
     }
     with app.test_request_context('/presentation'):
-        socketio.emit("update_pres", data,to=to)
-    data2= {
+        socketio.emit("update_pres", data, to=to)
+    data2 = {
         "labels": names,
         "times": times,
 
         "colors": colors,
-        "active":active
+        "active": active
     }
 
     with app.test_request_context('/controls'):
-        socketio.emit("update_ctrl", data2,to=to)
+        socketio.emit("update_ctrl", data2, to=to)
 
 
 if __name__ == "__main__":
     print("start")
     socketio.run(app, host="127.0.0.1")
-    

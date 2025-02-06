@@ -24,16 +24,15 @@ class TimeTracker:
         return total
 
     def colors(self):
-        return [speaker["color"] for _, speaker in self.speakers.items()]
+        return [speaker["color"] for speaker in self.speakers.values()]
 
     def names(self):
         return [[name, speaker["party"]] for name, speaker in self.speakers.items()]
 
     def times_total(self):
-        return [self.speaker_total(speaker["times"]) for _, speaker in self.speakers.items()]
+        return [self.speaker_total(speaker["times"]) for speaker in self.speakers.values()]
 
     def times(self):
-        # return [(speaker["times"]) for _, speaker in self.speakers.items()]
         ret = []
         for name, speaker in self.speakers.items():
             for period in speaker["times"]:
