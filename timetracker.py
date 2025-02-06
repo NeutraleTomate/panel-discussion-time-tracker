@@ -26,8 +26,11 @@ class TimeTracker:
     def colors(self):
         return [speaker["color"] for speaker in self.speakers.values()]
 
-    def names(self):
+    def labels(self):
         return [[name, speaker["party"]] for name, speaker in self.speakers.items()]
+
+    def names(self):
+        return list(self.speakers.keys())
 
     def times_total(self):
         return [self.speaker_total(speaker["times"]) for speaker in self.speakers.values()]
@@ -41,13 +44,15 @@ class TimeTracker:
                     t1 = datetime.datetime.fromtimestamp(period[0], datetime.UTC).strftime('%H:%M:%S')
                     t2 = datetime.datetime.fromtimestamp(period[1], datetime.UTC).strftime('%H:%M:%S')
                     dur = datetime.datetime.fromtimestamp(period[1] - period[0], datetime.UTC).strftime('%H:%M:%S')
-                    ret.append([name, t1, t2, dur])
+                    identifier = [name, period[0]]
+                    ret.append([name, t1, t2, dur, identifier])
                 else:
                     t1 = datetime.datetime.fromtimestamp(period[0], datetime.UTC).strftime('%H:%M:%S')
 
                     dur = datetime.datetime.fromtimestamp(int(time.time()) - period[0], datetime.UTC).strftime(
                         '%H:%M:%S')
-                    ret.append([name, t1, "now", dur])
+                    identifier = False
+                    ret.append([name, t1, "now", dur, identifier])
 
         return sorted(ret, key=lambda entry: entry[1])
 
@@ -73,3 +78,17 @@ class TimeTracker:
 
         self.speakers[name]["times"][-1].append(int(time.time()))
         return True
+
+    def delete(self, identifier):
+        if identifier == "all":
+            for name in self.speakers.keys():
+                self.speakers[name]["times"] = []
+        elif len(identifier) == 1:
+            self.speakers[identifier[0]]["times"] = []
+        elif len(identifier) == 2:
+            for t in self.speakers[identifier[0]]["times"]:
+                if t[0] == identifier[1]:
+                    if len(t) == 2:
+                        rem = t
+                    break
+            self.speakers[identifier[0]]["times"].remove(rem)

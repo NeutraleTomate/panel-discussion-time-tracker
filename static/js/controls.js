@@ -14,10 +14,14 @@ socket.on("update_ctrl",
         rows.forEach(function (row) {
             domRow = document.createElement('tr')
             table.appendChild(domRow)
+            i = 0
             row.forEach(function (elem) {
-                var domCell = document.createElement('td');
-                domRow.appendChild(domCell);
-                domCell.appendChild(document.createTextNode(elem));
+                if (i !== 4) {
+                    var domCell = document.createElement('td');
+                    domRow.appendChild(domCell);
+                    domCell.appendChild(document.createTextNode(elem));
+                }
+                i++
             });
         });
 
