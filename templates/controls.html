@@ -4,20 +4,18 @@
     <script src="/static/js/socket.io.js"></script>
     <script src="/static/js/controls.js"></script>
     <style>
-        .grid{
-        max-width: 40em;
-        margin-bottom: 2em
-    }
+        .grid {
+            max-width: 40em;
+            margin-bottom: 2em
+        }
     </style>
 {% endblock %}
 {% block main %}
     <div id="buttons">
         {% for speaker in speakers %}
             <div class="grid">
-                <button
-                        {% if speaker[disabled] %} disabled="disabled" {% endif %}
-
-                                                   onclick="socket.emit('start', {name: '{{ speaker[0] }}' })">
+                <button {% if speaker[disabled] %} disabled="disabled" {% endif %}
+                        onclick="socket.emit('start', {name: '{{ speaker[0] }}' })">
                     start
                 </button>
                 <button
