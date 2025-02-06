@@ -1,5 +1,4 @@
-import random
-
+from engineio.async_drivers import gevent
 from flask import Flask, render_template
 import flask_socketio as io
 import flask_apscheduler
@@ -27,7 +26,7 @@ speakers = [
      "color": "#bc3373"},
 
     {"party": "FDP",
-     "name": "Toralf Eisle",
+     "name": "Toralf Einsle",
      "color": "#ffed00"}
 ]
 
@@ -37,7 +36,6 @@ timetracker = timetracker.TimeTracker(speakers)
 @app.route('/')
 def index():
     return render_template("index.html")
-
 
 @app.route('/presentation')
 def presentation():
@@ -58,7 +56,10 @@ def start(data):
 def stop(data):
     timetracker.stop(data["name"])
 
-def send_update():
+@socketio.on('update')
+def send_update(d):
+    to=d["sid"]
+    
     names = timetracker.names()
     times = timetracker.times()
     times_total = timetracker.times_total()
@@ -70,8 +71,7 @@ def send_update():
         "colors": colors,
     }
     with app.test_request_context('/presentation'):
-        socketio.emit("update_pres", data)
-
+        socketio.emit("update_pres", data,to=to)
     data2= {
         "labels": names,
         "times": times,
@@ -81,11 +81,10 @@ def send_update():
     }
 
     with app.test_request_context('/controls'):
-        socketio.emit("update_ctrl", data2)
+        socketio.emit("update_ctrl", data2,to=to)
 
 
 if __name__ == "__main__":
-    scheduler = flask_apscheduler.APScheduler()
-    scheduler.add_job(func=send_update, trigger='interval', id='send_update', seconds=1)
-    scheduler.start()
-    socketio.run(app, allow_unsafe_werkzeug=True, debug=True, host="0.0.0.0")
+    print("start")
+    socketio.run(app, host="127.0.0.1")
+    

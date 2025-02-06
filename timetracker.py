@@ -30,7 +30,7 @@ class TimeTracker:
         return [[name, speaker["party"]] for name, speaker in self.speakers.items()]
 
     def times_total(self):
-        return [self.speaker_total(speaker["times"])*10 for _, speaker in self.speakers.items()]
+        return [self.speaker_total(speaker["times"]) for _, speaker in self.speakers.items()]
 
     def times(self):
         # return [(speaker["times"]) for _, speaker in self.speakers.items()]

@@ -1,5 +1,6 @@
 var socket = io();
 
+setInterval(function(){socket.emit("update",{sid:socket.id})}, 1000)
 
 socket.on("update_ctrl",
 
