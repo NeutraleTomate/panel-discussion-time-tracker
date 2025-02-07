@@ -1,7 +1,6 @@
 {% extends "default.html" %}
 {% block head %}
-    <title>Controls</title>
-    <script src="/static/js/socket.io.js"></script>
+    <title>Delete</title>
     <script src="/static/js/delete.js"></script>
     <style>
         .grid {
@@ -11,38 +10,40 @@
     </style>
 {% endblock %}
 {% block main %}
-    <a role="button" href="#" class="delete" onclick="socket.emit('delete', {identifier: 'all'})">Delete all data</a>
-    <a href="controls" role="button">Back to Controls</a>
+    <article>
+        <a role="button" href="#" class="delete" onclick="socket.emit('delete', {identifier: 'all'})">Delete all
+            data</a>
+        <a href="controls" role="button">Back to Controls</a>
+    </article>
+    <article>
+        <details>
+            <summary role="button">By Period</summary>
+            <table>
+                <thead>
+                <tr>
+                    <th scope="col">Name</th>
+                    <th scope="col">Start</th>
+                    <th scope="col">End</th>
+                    <th scope="col">Duration</th>
+                    <th scope="col">Delete</th>
+                </tr>
+                </thead>
+                <tbody id="tablebody"></tbody>
+            </table>
+        </details>
 
-    <details>
-        <summary>By Period</summary>
-        <table>
-            <thead>
-            <tr>
-                <th scope="col">Name</th>
-                <th scope="col">Start</th>
-                <th scope="col">End</th>
-                <th scope="col">Duration</th>
-                <th scope="col">Delete</th>
-
-            </tr>
-            </thead>
-            <tbody id="tablebody"></tbody>
-        </table>
-    </details>
-
-    <details>
-        <summary>By Speaker</summary>
-        <table>
-            <thead>
-            <tr>
-                <th scope="col">Name</th>
-                <th scope="col">Duration</th>
-                <th scope="col">Delete</th>
-
-            </tr>
-            </thead>
-            <tbody id="tablebody2"></tbody>
-        </table>
-    </details>
+        <details>
+            <summary role="button">By Speaker</summary>
+            <table>
+                <thead>
+                <tr>
+                    <th scope="col">Name</th>
+                    <th scope="col">Duration</th>
+                    <th scope="col">Delete</th>
+                </tr>
+                </thead>
+                <tbody id="tablebody2"></tbody>
+            </table>
+        </details>
+    </article>
 {% endblock %}

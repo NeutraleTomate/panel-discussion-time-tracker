@@ -1,7 +1,6 @@
 from engineio.async_drivers import gevent
 from flask import Flask, render_template
 import flask_socketio as io
-import flask_apscheduler
 
 import timetracker
 
@@ -99,5 +98,5 @@ def delete(data):
 
 
 if __name__ == "__main__":
-    print("start")
-    socketio.run(app, host="127.0.0.1")
+    print("Running on 127.0.0.1:5000")
+    socketio.run(app, host="127.0.0.1", port=5000)
