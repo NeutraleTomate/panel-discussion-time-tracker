@@ -1,0 +1,38 @@
+:root {
+    --primary: #4ED440 !important;
+    --background: #f1f2e5 !important;
+}
+
+html, body {
+    background: var(--background);
+    max-height: 100%;
+}
+
+.logo {
+    position: fixed;
+    right: 0;
+    top: 0;
+    margin: 2em;
+}
+
+.foot-right {
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    padding: 5px;
+}
+
+.foot-left {
+    position: fixed;
+    bottom: 0;
+    padding: 5px;
+}
+
+.delete {
+    background: red;
+}
+
+@font-face {
+    font-family: sora;
+    src: url(/static/packages/Sora-VariableFont_wght.ttf);
+}
