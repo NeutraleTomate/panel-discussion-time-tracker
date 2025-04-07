@@ -32,21 +32,6 @@
                                 }
                             }
                         },
-                        y: {
-                            suggestedMax: 300,
-                            beginAtZero: true,
-                            ticks: {
-                                font: {
-                                    size: 16,
-                                    family: "sora",
-                                },
-                                callback: function (value, index, ticks) {
-                                    return "   " + Math.floor(value / 3600).toString().padStart(2, "0") + ':' + Math.floor((value % 3600) / 60).toString().padStart(2, "0")
-                                }
-                            },
-
-
-                        }
                     },
                     plugins: {
                         legend: {
