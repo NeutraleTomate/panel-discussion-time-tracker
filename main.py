@@ -1,35 +1,22 @@
 from engineio.async_drivers import gevent
 from flask import Flask, render_template
 import flask_socketio as io
+import yaml
 
 import timetracker
 
 app = Flask(__name__)
 socketio = io.SocketIO(app)
 
-speakers = [
-    {"party": "CDU",
-     "name": "Dr. Markus Reichel",
-     "color": "#000000"},
+try:
+    with open("speakers.yaml", "r") as file:
+        speakers = yaml.safe_load(file)["speakers"]
+except:
+    speakers = None
 
-    {"party": "SPD",
-     "name": "Fabian Funke",
-     "color": "#E3000F"},
 
-    {"party": "B90/Grüne",
-     "name": "Bernhard Herrmann",
-     "color": "#46962b"},
-
-    {"party": "Die Linke",
-     "name": "Nina Treu",
-     "color": "#bc3373"},
-
-    {"party": "FDP",
-     "name": "Toralf Einsle",
-     "color": "#ffed00"}
-]
-
-timetracker = timetracker.TimeTracker(speakers)
+if speakers is not None:
+    timetracker = timetracker.TimeTracker(speakers)
 
 
 @app.route('/')
@@ -98,5 +85,9 @@ def delete(data):
 
 
 if __name__ == "__main__":
-    print("Running on 127.0.0.1:5000")
-    socketio.run(app, host="127.0.0.1", port=5000)
+    if speakers is None:
+        print("Error: could not read any speakers from file speakers.yaml")
+        print("You can use yamlchecker.com or similar tools to check the contents of your yaml file")
+    else:
+        print("Running on 127.0.0.1:5000")
+        socketio.run(app, host="127.0.0.1", port=5000)

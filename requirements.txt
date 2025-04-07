@@ -9,6 +9,7 @@ Flask-SocketIO==5.3.7
 APScheduler==3.11.0
 Flask-APScheduler==1.13.1
 gevent
+PyYAML==6.0.2
 
 
 

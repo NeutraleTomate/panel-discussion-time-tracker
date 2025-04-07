@@ -1,0 +1,20 @@
+speakers:
+  - party: CDU
+    name: Dr. Markus Reichel
+    color: #000000
+
+  - party: SPD
+    name: Fabian Funke
+    color: #E3000F
+
+  - party: B90/Grüne
+    name: Bernhard Herrmann
+    color: #46962b
+
+  - party: Die Linke
+    name: Nina Treu
+    color: #bc3373
+
+  - party: FDP
+    name: Toralf Einsle
+    color: #ffed00
